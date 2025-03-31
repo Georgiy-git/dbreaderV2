@@ -17,6 +17,8 @@ add_executable(dbreaderv2 main.cpp
     table.hpp table.cpp table.ui
     opendb.hpp opendb.cpp opendb.ui
     sqlite3.h sqlite3.c
+    images.qrc
+    createtable.cpp createtable.hpp createtable.ui
 )
 
 target_link_libraries(dbreaderv2 Qt6::Widgets Qt6::Core Qt6::Sql)

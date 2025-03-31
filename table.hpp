@@ -6,6 +6,7 @@
 #include "sqlite3.h"
 
 class OpenDb;
+class CreateTable;
 
 namespace Ui {
 class Table;
@@ -26,9 +27,14 @@ private slots:
 
     void on_action_14_triggered();
 
+    void on_action_2_triggered();
+
+    void on_action_3_triggered();
+
 private:
     Ui::Table *ui;
     OpenDb* dialog1;
+    CreateTable* dialog2;
     std::vector<std::shared_ptr<QPushButton>> tables;
     QString this_table;
     QSqlTableModel* sql_table_model = nullptr;

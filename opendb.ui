@@ -35,30 +35,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox">
-       <property name="maximumSize">
-        <size>
-         <width>20</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QComboBox {
-background-color: blue;
-border: none;
-color: white;
-margin: 1px 1px;
-        }
-QComboBox:hover {
-background-color: lightblue;
-        }
-QComboBox:pressed {
-background-color: #21618C;
-        }</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="pushButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">

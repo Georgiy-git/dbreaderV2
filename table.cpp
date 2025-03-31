@@ -1,4 +1,5 @@
 #include "opendb.hpp"
+#include "createtable.hpp"
 #include "table.hpp"
 #include "ui_table.h"
 
@@ -14,6 +15,8 @@ Table::Table() : ui(new Ui::Table)
     sqlite3_open("history.db", &history_db);
     sqlite3_exec(history_db, "CREATE TABLE IF NOT EXISTS info1 (path TEXT)", nullptr, nullptr, nullptr);
     sqlite3_exec(history_db, "SELECT * FROM info1", _get_data, this, nullptr);
+    setWindowTitle("DataBase Reader V2");
+    setWindowIcon(QIcon(":/DataBase.svg"));
 }
 
 Table::~Table()
@@ -41,6 +44,7 @@ void Table::open_db(QString db_name)
     while (query.next())
     {
         QString table_name = query.value(0).toString();
+        if (table_name == "sqlite_sequence") continue;
         std::shared_ptr<QPushButton> table_button = std::make_shared<QPushButton>(table_name);
         connect(table_button.get(), &QPushButton::clicked, this,
                 [this, table_name]{_set_table_model(table_name);});
@@ -70,7 +74,9 @@ void Table::open_db(QString db_name)
 //Открыть БД
 void Table::on_action_triggered()
 {
-    dialog1 = new OpenDb;
+    dialog1 = new OpenDb(history_db);
+    dialog1->setWindowTitle(" ");
+    dialog1->setWindowIcon(QIcon(":/DataBase.svg"));
     connect(dialog1, &OpenDb::signal_open_db, this, open_db);
     dialog1->show();
 }
@@ -97,5 +103,22 @@ void Table::on_action_14_triggered()
 {
     sqlite3_exec(history_db, "SELECT * FROM info1", _get_data, this, nullptr);
     if (!last_table.isEmpty()) open_db(last_table);
+}
+
+
+void Table::on_action_2_triggered()
+{
+    dialog2 = new CreateTable();
+    dialog2->setWindowTitle("Создание БД");
+    dialog2->setWindowIcon(QIcon(":/DataBase.svg"));
+    connect(dialog2, &CreateTable::signal_open_db, this, open_db);
+    dialog2->show();
+}
+
+
+void Table::on_action_3_triggered()
+{
+    if (db.open()) QSqlQuery("DROP TABLE "+this_table);
+    if (sql_table_model != nullptr) { delete sql_table_model; }
 }
 
