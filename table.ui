@@ -97,7 +97,7 @@
   </action>
   <action name="action_3">
    <property name="text">
-    <string>Стереть БД</string>
+    <string>Удалить таблицу</string>
    </property>
   </action>
   <action name="action_5">

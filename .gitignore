@@ -1,2 +1,4 @@
 build
 cmake
+sqlite3.h
+sqlite3.c
